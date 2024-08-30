@@ -1,21 +1,33 @@
-public class Doctor {
-  static int id = 0;
-  String name;
-  String email;
-  String speciality;
+public class Doctor extends User {
 
-  Doctor() {
-    System.out.println("Construyendo el Object 'Doctor' ");
-  }
+  private String speciality;
+  private String company;
 
-  Doctor(String name, String speciality) {
-    this.name = name;
+  Doctor(String name, String lastname, String email, String address, String speciality, String company) {
+    super(name, lastname, email, address);
     this.speciality = speciality;
-    id++;
-    System.out.println("El nombre asignado es: " + name);
+    this.company = company;
   }
 
-  public void showInfo() {
-    System.out.println("El nombre del doctor es: " + name + " y su especialidad es: " + speciality);
+  public String getSpeciality() {
+    return speciality;
   }
+
+  public void setSpeciality(String speciality) {
+    this.speciality = speciality;
+  }
+
+  public String getCompany() {
+    return company;
+  }
+
+  public void setCompany(String company) {
+    this.company = company;
+  }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n" + "Especialidad: " + this.speciality + ", Compañia: " + this.company;
+  }
+
 }

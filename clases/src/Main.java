@@ -1,13 +1,9 @@
 public class Main {
 	public static void main(String[] args) {
-		System.out.println("Hello, World!");
+		Doctor myDoctor = new Doctor("Ivan", "Ortega", "Example@gmail.com", "Cra $ N° 4 - 57 ", "Neuro Cirujano",
+				"SOS PAC");
 
-		Doctor myDoctor = new Doctor("Daniel", "Pediatra");
-		myDoctor.showInfo();
+		System.out.println(myDoctor);
 
-		Patient patient_1 = new Patient("Ivan", "IvanOrtega_97@hotmail.com");
-
-		patient_1.setPhoneNumber("12412515125");
-		System.out.println(patient_1.getPhoneNumber());
 	}
 }
