@@ -15,5 +15,15 @@ public class Main {
 
 		patient.showDataUser();
 
+		User user1 = new User("Andre", "example@gmail.com") {
+			@Override
+			public void showDataUser() {
+				System.out.println("doctos");
+				System.out.println("example");
+			}
+		};
+
+		user1.showDataUser();
+
 	}
 }
