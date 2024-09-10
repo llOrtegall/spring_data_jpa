@@ -1,9 +1,11 @@
+package model;
+
 public class Doctor extends User {
 
   private String speciality;
   private String company;
 
-  Doctor(String name, String lastname, String email, String address, String speciality, String company) {
+  public Doctor(String name, String lastname, String email, String address, String speciality, String company) {
     super(name, lastname, email, address);
     this.speciality = speciality;
     this.company = company;

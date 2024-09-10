@@ -1,3 +1,5 @@
+package model;
+
 public class Patient {
   // estos datos ahora solo son accesibles desde la Clase (Encapsulamiento)
   // execto: id
@@ -11,7 +13,7 @@ public class Patient {
   private String phoneNumber;
   int id;
 
-  Patient(String name, String email) {
+  public Patient(String name, String email) {
     this.name = name;
     this.email = email;
   }
