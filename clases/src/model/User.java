@@ -1,6 +1,6 @@
 package model;
 
-public class User {
+public abstract class User {
   private int id;
   private String name;
   private String lastname;
@@ -12,7 +12,6 @@ public class User {
     this.lastname = lastname;
     this.email = email;
     this.address = address;
-
   }
 
   public int getId() {
@@ -63,4 +62,6 @@ public class User {
     return "User: " + this.name + ", Email:" + this.email + "\n" +
         "Address: " + this.address + ", Phone: ";
   }
+
+  public abstract void showDataUser();
 }

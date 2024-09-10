@@ -32,4 +32,10 @@ public class Doctor extends User {
     return super.toString() + "\n" + "Especialidad: " + this.speciality + ", Compañia: " + this.company;
   }
 
+  @Override
+  public void showDataUser() {
+    System.out.println("Hospital: " + this.company);
+    System.out.println("Departamento: Cirugía");
+  }
+
 }

@@ -1,61 +1,36 @@
 package model;
 
-public class Patient {
-  // estos datos ahora solo son accesibles desde la Clase (Encapsulamiento)
-  // execto: id
-  private String name;
+public class Patient extends User {
   private double weight;
   private double height;
-  private String email;
-  private String address;
   private String birthday;
   private String blood;
   private String phoneNumber;
-  int id;
 
-  public Patient(String name, String email) {
-    this.name = name;
-    this.email = email;
+  public Patient(String name, String lastname, String email, String addreses, double weight, double height,
+      String birthday, String blood, String phoneNumber) {
+    super(name, lastname, email, addreses);
+    this.weight = weight;
+    this.height = height;
+    this.birthday = birthday;
+    this.blood = blood;
+    this.phoneNumber = phoneNumber;
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getWeight() {
-    return this.weight + " - Kg.";
+  public double getWeight() {
+    return weight;
   }
 
   public void setWeight(double weight) {
     this.weight = weight;
   }
 
-  public String getHeight() {
-    return this.height + " - m.";
+  public double getHeight() {
+    return height;
   }
 
   public void setHeight(double height) {
     this.height = height;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
   }
 
   public String getBirthday() {
@@ -67,7 +42,7 @@ public class Patient {
   }
 
   public String getBlood() {
-    return this.blood;
+    return blood;
   }
 
   public void setBlood(String blood) {
@@ -75,13 +50,17 @@ public class Patient {
   }
 
   public String getPhoneNumber() {
-    return this.phoneNumber;
+    return phoneNumber;
   }
 
-  public void setPhoneNumber(String phone) {
-    if (phone.length() < 8) {
-      throw new IllegalArgumentException("El número de telefono debe ser máximo de 8 dígitos");
-    }
-    this.phoneNumber = phone;
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
+
+  @Override
+  public void showDataUser() {
+    System.out.println("Paciente: " + getName());
+    System.out.println("Historial del paciente");
+  }
+
 }
