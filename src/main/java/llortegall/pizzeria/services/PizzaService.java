@@ -1,6 +1,7 @@
 package llortegall.pizzeria.services;
 
 import llortegall.pizzeria.persistence.entity.PizzaEntity;
+import llortegall.pizzeria.persistence.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,14 +11,18 @@ import java.util.List;
 
 @Service
 public class PizzaService {
-    private final JdbcTemplate jdbcTemplate;
+    private final PizzaRepository pizzaRepo;
 
     @Autowired
-    public PizzaService(JdbcTemplate jdbcTemplate){
-        this.jdbcTemplate = jdbcTemplate;
+    public PizzaService(PizzaRepository pizzaRepo) {
+        this.pizzaRepo = pizzaRepo;
     }
 
-    public List<PizzaEntity> getAll(){
-        return this.jdbcTemplate.query("SELECT * FROM pizza WHERE available = 0", new BeanPropertyRowMapper<>(PizzaEntity.class));
+    public List<PizzaEntity> getAllPizzas(){
+        return this.pizzaRepo.findAll();
+    }
+
+    public PizzaEntity getPizzaById(int idPizza){
+        return this.pizzaRepo.findById(idPizza).orElse(null);
     }
 }
