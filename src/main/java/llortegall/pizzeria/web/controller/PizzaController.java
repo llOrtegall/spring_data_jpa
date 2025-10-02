@@ -4,10 +4,7 @@ import llortegall.pizzeria.persistence.entity.PizzaEntity;
 import llortegall.pizzeria.services.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +26,23 @@ public class PizzaController {
     @GetMapping("/{id}")
     public ResponseEntity<PizzaEntity> getById(@PathVariable int id){
         return ResponseEntity.ok(this.pizzaService.getPizzaById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<PizzaEntity> add(@RequestBody PizzaEntity newPizza){
+        if(newPizza.getIdPizza() == null || !this.pizzaService.exists(newPizza.getIdPizza())){
+            return ResponseEntity.ok(this.pizzaService.createNewPizza(newPizza));
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<PizzaEntity> update(@RequestBody PizzaEntity newPizza){
+        if(newPizza.getIdPizza() != null && this.pizzaService.exists(newPizza.getIdPizza())){
+            return ResponseEntity.ok(this.pizzaService.createNewPizza(newPizza));
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 }
