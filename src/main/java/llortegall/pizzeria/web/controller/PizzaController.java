@@ -3,6 +3,7 @@ package llortegall.pizzeria.web.controller;
 import llortegall.pizzeria.persistence.entity.PizzaEntity;
 import llortegall.pizzeria.services.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +20,9 @@ public class PizzaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PizzaEntity>> getAll(){
-        return ResponseEntity.ok(this.pizzaService.getAllPizzas());
+    public ResponseEntity<Page<PizzaEntity>> getAll(@RequestParam(defaultValue = "0") int page,
+                                                    @RequestParam(defaultValue = "4") int elem){
+        return ResponseEntity.ok(this.pizzaService.getAllPizzas(page, elem));
     }
 
     @GetMapping("/available")
