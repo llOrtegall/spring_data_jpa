@@ -1,23 +1,31 @@
 package llortegall.pizzeria.services;
 
 import llortegall.pizzeria.persistence.entity.PizzaEntity;
+import llortegall.pizzeria.persistence.repository.PizzaPagSortRepository;
 import llortegall.pizzeria.persistence.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
 @Service
 public class PizzaService {
     private final PizzaRepository pizzaRepo;
+    private final PizzaPagSortRepository pizzaBySort;
 
     @Autowired
-    public PizzaService(PizzaRepository pizzaRepo) {
+    public PizzaService(PizzaRepository pizzaRepo, PizzaPagSortRepository pizzaBySort) {
         this.pizzaRepo = pizzaRepo;
+        this.pizzaBySort = pizzaBySort;
     }
 
-    public List<PizzaEntity> getAllPizzas(){
-        return this.pizzaRepo.findAll();
+    public Page<PizzaEntity> getAllPizzas(int page, int elem){
+        Pageable pageRequest = PageRequest.of(page, elem);
+        return this.pizzaBySort.findAll(pageRequest);
     }
 
     public List<PizzaEntity> getAllPizzasAvailable(){
