@@ -21,6 +21,7 @@ public class PizzaService {
     }
 
     public List<PizzaEntity> getAllPizzasAvailable(){
+        System.out.println(this.pizzaRepo.countAllByVeganTrue());
         return this.pizzaRepo.findAllByAvailableTrueOrderByPrice();
     }
 
