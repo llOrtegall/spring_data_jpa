@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -28,9 +29,13 @@ public class PizzaService {
         return this.pizzaBySort.findAll(pageRequest);
     }
 
-    public List<PizzaEntity> getAllPizzasAvailable(){
+    public Page<PizzaEntity> getAllPizzasAvailable(int page, int elem, String sortBy, String sortDirection){
         System.out.println(this.pizzaRepo.countAllByVeganTrue());
-        return this.pizzaRepo.findAllByAvailableTrueOrderByPrice();
+
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
+
+        Pageable pageRequest = PageRequest.of(page, elem, sort);
+        return this.pizzaBySort.findByAvailableTrue(pageRequest);
     }
 
     public PizzaEntity getPizzaByName(String name){
