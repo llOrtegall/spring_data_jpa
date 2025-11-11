@@ -1,6 +1,7 @@
 package llortegall.pizzeria.web.controller;
 
 import llortegall.pizzeria.persistence.entity.OrderEntity;
+import llortegall.pizzeria.persistence.projection.OrderSummary;
 import llortegall.pizzeria.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +40,10 @@ public class OrderController {
     @GetMapping("/customer/{id}")
     public ResponseEntity<List<OrderEntity>> getOrdersCustomer(@PathVariable String id){
         return ResponseEntity.ok(this.orderService.getCustomerOrdersById(id));
+    }
+
+    @GetMapping("/summary/{id}")
+    public ResponseEntity<OrderSummary> getOrdersCustomer(@PathVariable int id){
+        return ResponseEntity.ok(this.orderService.getSummary(id));
     }
 }
