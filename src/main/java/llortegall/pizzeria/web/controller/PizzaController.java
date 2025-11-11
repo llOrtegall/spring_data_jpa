@@ -2,6 +2,7 @@ package llortegall.pizzeria.web.controller;
 
 import llortegall.pizzeria.persistence.entity.PizzaEntity;
 import llortegall.pizzeria.services.PizzaService;
+import llortegall.pizzeria.services.dto.UpdatePizzaPriceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -80,6 +81,16 @@ public class PizzaController {
     public ResponseEntity<Void> delete(@PathVariable int idPizza){
         if(this.pizzaService.exists(idPizza)){
             this.pizzaService.deletePizza(idPizza);
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PatchMapping("/update")
+    public ResponseEntity<Void> update(@RequestBody UpdatePizzaPriceDto dto){
+        if(this.pizzaService.exists(dto.getPizzaId())){
+            this.pizzaService.updatePrice(dto);
             return ResponseEntity.ok().build();
         }
 
