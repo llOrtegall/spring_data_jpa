@@ -3,12 +3,16 @@ package llortegall.pizzeria.services;
 import llortegall.pizzeria.persistence.entity.PizzaEntity;
 import llortegall.pizzeria.persistence.repository.PizzaPagSortRepository;
 import llortegall.pizzeria.persistence.repository.PizzaRepository;
+import llortegall.pizzeria.services.dto.UpdatePizzaPriceDto;
+import llortegall.pizzeria.services.exception.EmailApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -65,6 +69,18 @@ public class PizzaService {
 
     public void deletePizza(int idPizza){
         this.pizzaRepo.deleteById(idPizza);
+    }
+
+    @Transactional(noRollbackFor = EmailApiException.class
+            // propagation = Propagation.MANDATORY * por defecto se usa
+    )
+    public void updatePrice(UpdatePizzaPriceDto dto){
+        this.pizzaRepo.updatePrice(dto);
+        this.sendEmail();
+    }
+
+    private void sendEmail(){
+        throw new EmailApiException();
     }
 
     public boolean exists(int idPizza){
