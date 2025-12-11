@@ -1,6 +1,7 @@
 package llortegall.pizzeria.services;
 
 import llortegall.pizzeria.persistence.entity.OrderEntity;
+import llortegall.pizzeria.persistence.projection.OrderSummary;
 import llortegall.pizzeria.persistence.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,9 @@ public class OrderService {
 
     public List<OrderEntity> getCustomerOrdersById(String idCustomer){
         return this.orderRepo.findCustomerOrders(idCustomer);
+    }
+
+    public OrderSummary getSummary(int orderId){
+        return this.orderRepo.findSummary(orderId);
     }
 }

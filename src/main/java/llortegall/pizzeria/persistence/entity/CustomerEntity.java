@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CustomerEntity {
+public class CustomerEntity extends AuditableEntity{
     @Id
     @Column(name = "id_customer", nullable = false, length = 15)
     private String idCustomer;
