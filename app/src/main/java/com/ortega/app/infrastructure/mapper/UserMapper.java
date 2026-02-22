@@ -6,13 +6,19 @@ import com.ortega.app.infrastructure.user.UserEntity;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public abstract class UserMapper {
     // Domain to Infrastructure
-    UserEntity toEntity(User user);
+    public abstract UserEntity toEntity(User user);
 
     // Infrastructure to Domain
-    User toDomain(UserEntity entity);
+    public User toDomain(UserEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        return new User(entity.getId(), entity.getNames(), entity.getEmail(), 
+                        entity.getPassword(), entity.getCreatedAt(), entity.getUpdatedAt());
+    }
 
     // Domain to Response DTO
-    UserResponseDTO toResponseDTO(User user);
+    public abstract UserResponseDTO toResponseDTO(User user);
 }
